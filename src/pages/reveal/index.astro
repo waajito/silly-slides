@@ -1,0 +1,100 @@
+---
+---
+
+<div>
+  <section>
+    <h1 class="zoom-in">
+      THE ANGELS HAVE FALLEN<br /> FROM HEAVEN. THEY ARE<br /> GOING TO FLY BACK
+      UP.
+    </h1>
+  </section>
+
+  <section class="overlay">
+    <h1 class="zoom-in">
+      THE DEMONS WILL CRAWL <br />OUT OF HELL. THEY MUST<br /> BE DAMNED TO GROUND.
+    </h1>
+  </section>
+</div>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+  integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"></script>
+
+<script>
+  const overlay = document.querySelector(".overlay");
+
+  window.addEventListener("mousemove", (e) => {
+    const { clientX, clientY } = e;
+
+    const x = Math.round((clientX / window.innerWidth) * 100);
+    const y = Math.round((clientY / window.innerHeight) * 100);
+
+    gsap.to(overlay, {
+      "--x": `${x}%`,
+      "--y": `${y}%`,
+      duration: 0.3,
+      ease: "sine.out",
+    });
+  });
+
+  const zoomIn = document.querySelectorAll(".zoom-in");
+  zoomIn.forEach((element) => {
+    element.addEventListener("mouseenter", (e) => {
+      console.log("entered");
+      gsap.to(overlay, {
+        "--radius": "200px",
+        duration: 0.3,
+        ease: "sine.out",
+      });
+    });
+
+    element.addEventListener("mouseleave", (e) => {
+      console.log("exited");
+
+      gsap.to(overlay, {
+        "--radius": "30px",
+        duration: 0.3,
+        ease: "sine.out",
+      });
+    });
+  });
+</script>
+
+<style lang="scss">
+  section {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Inter", sans-serif;
+    background-color: #0d0d0d;
+    color: #b5ab9a;
+    font-size: 50px;
+  }
+
+  .overlay {
+    background-color: #eb593a;
+    color: #0d0d0d;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    clip-path: circle(var(--radius, 30px) at var(--x, 50%) var(--y, 100%));
+    transition: clip-path 100ms;
+  }
+
+  .zoom-in {
+    cursor: default;
+  }
+</style>
+
+<style is:global>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+</style>
