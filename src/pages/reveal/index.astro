@@ -63,12 +63,20 @@
 </script>
 
 <style lang="scss">
+  /* Register your custom font family and tell the browser where to find it. */
+  @font-face {
+    font-family: "Proxima Nova";
+    src: url("/fonts/ProximaNova.otf") format("otf");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
   section {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: "Inter", sans-serif;
+    font-family: "Proxima Nova", "Inter", sans-serif;
     background-color: #0d0d0d;
     color: #b5ab9a;
     font-size: 50px;
