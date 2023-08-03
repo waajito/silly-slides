@@ -1,20 +1,31 @@
 ---
 ---
 
-<div>
-  <section>
-    <h1 class="zoom-in">
-      THE ANGELS HAVE FALLEN<br /> FROM HEAVEN. THEY ARE<br /> GOING TO FLY BACK
-      UP.
-    </h1>
-  </section>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Astro</title>
+  </head>
+  <body>
+    <div>
+      <section>
+        <h1 class="zoom-in">
+          THE ANGELS HAVE FALLEN<br /> FROM HEAVEN. THEY ARE<br /> GOING TO FLY BACK
+          UP.
+        </h1>
+      </section>
 
-  <section class="overlay">
-    <h1 class="zoom-in">
-      THE DEMONS WILL CRAWL <br />OUT OF HELL. THEY MUST<br /> BE DAMNED TO GROUND.
-    </h1>
-  </section>
-</div>
+      <section class="overlay">
+        <h1 class="zoom-in">
+          THE DEMONS WILL CRAWL <br />OUT OF HELL. THEY MUST<br /> BE DAMNED TO GROUND.
+        </h1>
+      </section>
+    </div>
+  </body>
+</html>
 
 <script
   src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
@@ -30,7 +41,7 @@
 
     const x = Math.round((clientX / window.innerWidth) * 100);
     const y = Math.round((clientY / window.innerHeight) * 100);
-
+    //@ts-expect-error
     gsap.to(overlay, {
       "--x": `${x}%`,
       "--y": `${y}%`,
@@ -43,6 +54,7 @@
   zoomIn.forEach((element) => {
     element.addEventListener("mouseenter", (e) => {
       console.log("entered");
+      //@ts-expect-error
       gsap.to(overlay, {
         "--radius": "200px",
         duration: 0.3,
@@ -52,7 +64,7 @@
 
     element.addEventListener("mouseleave", (e) => {
       console.log("exited");
-
+      //@ts-expect-error
       gsap.to(overlay, {
         "--radius": "30px",
         duration: 0.3,
