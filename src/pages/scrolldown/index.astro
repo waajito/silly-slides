@@ -1,0 +1,232 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import Mouse from "./mouse.astro";
+---
+
+<SiteLayout title="scroll">
+  <div class="container">
+    <section class="hero">
+      <h1>watch the magic by scrolling down</h1>
+      <Mouse />
+    </section>
+    <section
+      class="reveal"
+      style="background-color: #EB593A;"
+      data-bg-color="#EB593A"
+      data-fg-color="#0D0D0D"
+    >
+      <h1>
+        Time is too slow for those who wait, too swift for those who fear, too
+        long for those who grieve, too short for those who rejoice, but for
+        those who love, time is eternity.
+      </h1>
+      <h1>Henry Van Dyke</h1>
+    </section>
+    <section
+      class="reveal"
+      style="background-color: #F3F3F3;"
+      data-bg-color="#F3F3F3"
+      data-fg-color="#0D0D0D"
+    >
+      <h1>
+        You can fool all of the people some of the time, and some of the people
+        all of the time, but you can't fool all of the people all of the time.
+      </h1>
+      <h1>Abraham Lincoln</h1>
+    </section>
+    <section
+      class="reveal"
+      style="background-color: #0D0D0D;"
+      data-bg-color="#0D0D0D"
+      data-fg-color="#B5AB9A"
+    >
+      <h1>
+        I have a dream that my four little children will one day live in a
+        nation where they will not be judged by the color of their skin but by
+        the content of their character.
+      </h1>
+      <h1>Martin Luther King</h1>
+    </section>
+  </div>
+
+  <script
+    src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.19/bundled/lenis.min.js"
+  ></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"
+    integrity="sha512-16esztaSRplJROstbIIdwX3N97V1+pZvV33ABoG1H2OyTttBxEGkTsoIVsiP1iaTtM8b3+hu2kB6pQ4Clr5yug=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"
+    integrity="sha512-Ic9xkERjyZ1xgJ5svx3y0u3xrvfT/uPkV99LBwe68xjy/mGtO+4eURHZBW2xW4SZbFrF1Tf090XqB+EVgXnVjw=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+
+  <!-- Minified UMD bundle -->
+  <script
+    src="https://unpkg.com/split-type"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+</SiteLayout>
+
+<script lang="js">
+//gsap
+gsap.registerPlugin(ScrollTrigger);
+
+const splitTypes = document.querySelectorAll(".reveal");
+
+splitTypes.forEach((char, i) => {
+    const fg = char.dataset.fgColor;
+
+    if (i == 0) {
+        const text = new SplitType(char, { types: "chars" });
+
+        console.log(char);
+        gsap.fromTo(
+            text.chars,
+            {
+                opacity: 0.2,
+                color: fg,
+            },
+            {
+                color: fg,
+                opacity: 1,
+                duration: 0.3,
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: char,
+                    start: "top 50%",
+                    end: "top 10%",
+                    toggleActions: "play play reverse reverse",
+                },
+            }
+        );
+    } else if (i == 1) {
+        const text = new SplitType(char, { types: "words" });
+
+        gsap.fromTo(
+            text.words,
+            {
+                opacity: 0.1,
+                color: fg,
+                y: -10,
+            },
+            {
+                color: fg,
+                opacity: 1,
+                y: 0,
+
+                duration: 0.3,
+                stagger: 0.1,
+                scrollTrigger: {
+                    trigger: char,
+                    start: "top 50%",
+                    end: "top 10%",
+                    toggleActions: "play play reverse reverse",
+                },
+            }
+        );
+    } else if (i == 2) {
+        const text = new SplitType(char, { types: "chars" });
+
+        gsap.fromTo(
+            text.chars,
+            {
+                opacity: 0.2,
+                color: fg,
+            },
+            {
+                color: fg,
+                opacity: 1,
+                duration: 0.3,
+                stagger: 0.02,
+                scrollTrigger: {
+                    trigger: char,
+                    start: "top 50%",
+                    end: "top 10%",
+                    toggleActions: "play play reverse reverse",
+                    scrub: true,
+                },
+            }
+        );
+    }
+    // else
+    //     gsap.fromTo(
+    //         text.chars,
+    //         {
+    //             opacity: 0.2,
+    //             color: fg,
+    //         },
+    //         {
+    //             color: fg,
+    //             opacity: 1,
+    //             duration: 0.3,
+    //             stagger: 0.02,
+    //             scrollTrigger: {
+    //                 trigger: char,
+    //                 start: "top 50%",
+    //                 end: "top 10%",
+    //                 // scrub: true,
+    //                 toggleActions: "play play reverse reverse",
+    //             },
+    //         }
+    //     );
+});
+
+//lenis
+const lenis = new Lenis();
+
+lenis.on("scroll", (e) => {
+    console.log(e);
+});
+
+function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+}
+
+requestAnimationFrame(raf);
+</script>
+
+<style lang="scss">
+  @font-face {
+    font-family: "Proxima Nova";
+    src: url("/fonts/ProximaNova.otf") format("otf");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+
+  .reveal,
+  .hero {
+    font-family: "Proxima Nova", Geneva, Tahoma, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 clamp(2rem, 10vw, 10rem);
+    h1 {
+      font-size: 40px;
+      line-height: 150%;
+      text-transform: uppercase;
+
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
+
+  .hero {
+    background-color: #3aebab;
+
+    h1 {
+      text-align: center !important;
+    }
+  }
+</style>
