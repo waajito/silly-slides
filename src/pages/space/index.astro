@@ -1,0 +1,167 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Press Space">
+  <ul>
+    <li><p id="content">Press Space</p></li>
+  </ul>
+</SiteLayout>
+
+<style lang="scss">
+  @font-face {
+    font-family: "Proxima Nova";
+    src: url("/fonts/ProximaNova.otf") format("otf");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Proxima Nova", sans-serif;
+    font-weight: bold;
+  }
+
+  body {
+    background-color: #0d0d0d;
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 100vh;
+    margin: 0;
+
+    li {
+      list-style: none;
+      p {
+        animation: reset 0.5s ease-in-out;
+        text-transform: uppercase;
+        text-align: center;
+
+        font-size: clamp(1.5rem, 10vw, 8rem);
+        text-shadow: 6px 6px 0px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  @keyframes reset {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+</style>
+
+<script>
+  const sequence = [
+    '"Press Space"',
+    "To",
+    "Change",
+    "the screen",
+    "and show",
+    "a new ",
+    "sequence",
+  ];
+
+  console.log(sequence);
+  let index = 0;
+  const content = document.querySelector("#content");
+
+  const colors = [
+    {
+      color: "#B5AB9A",
+      background: "#0D0D0D",
+    },
+    {
+      color: "#0D0D0D",
+      background: "#EB593A",
+    },
+    {
+      color: "#FFC312",
+      background: "#5758BB",
+    },
+    {
+      color: "#C4E538",
+      background: "#006266",
+    },
+    {
+      color: "#FFF9E7",
+      background: "#6F1E51",
+    },
+    {
+      color: "#FFE9CF",
+      background: "#ED4C67",
+    },
+  ];
+
+  //random value
+  const random = (min: number, max: number) =>
+    Math.floor(Math.random() * (max - min + 1) + min);
+
+  function animateWord() {
+    if (index == sequence.length) {
+      index = 0;
+    }
+
+    content!.innerHTML = sequence[index];
+
+    content!.animate(
+      [
+        {
+          opacity: 0,
+
+          transform: "scaleY(0.9) scaleX(1.1) ",
+          letterSpacing: "0.5rem",
+        },
+        {
+          opacity: 1,
+          transform: "scaleY(1) scaleX(1) ",
+        },
+      ],
+      {
+        duration: 500,
+        easing: "ease-in-out",
+      }
+    );
+
+    //random color
+    const color = colors[random(0, colors.length - 1)];
+    document.body.animate(
+      [
+        {
+          backgroundColor: document.body.style.backgroundColor,
+        },
+
+        {
+          backgroundColor: color.background as string,
+        },
+      ],
+      {
+        duration: 500,
+        easing: "ease-in-out",
+        fill: "forwards",
+      }
+    );
+    document.body.style.color = color.color;
+
+    index++;
+  }
+  window.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+      animateWord();
+    }
+  });
+
+  //touch listener
+  window.addEventListener("touchstart", () => {
+    animateWord();
+  });
+  animateWord();
+</script>
