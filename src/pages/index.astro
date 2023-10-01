@@ -12,9 +12,9 @@
   <body>
     <nav>
       <ul>
-        <li><a href="/scrolldown">scroll down</a></li>
-        <li><a href="/reveal">reveal</a></li>
-        <li><a href="/space">press space</a></li>
+        <li><a href="/scrolldown"><span>scroll down</span></a></li>
+        <li><a href="/reveal"><span>reveal</span></a></li>
+        <li><a href="/space"><span>press space</span></a></li>
       </ul>
     </nav>
   </body>
@@ -38,6 +38,7 @@
         text-decoration: none;
         transition: all 0.2s ease-in-out;
         display: flex;
+        width: 100vw;
         &:hover {
           background: #fff;
           color: #0d0d0d;
@@ -54,11 +55,19 @@
 
           transition: letter-spacing 0.2s ease-in-out,
             font-weight 0.2s ease-in-out, transform 0.3s ease-in-out;
+          position: relative;
 
+          span {
+            transition: padding 0.3s ease-in-out,
+              letter-spacing 0.3s ease-in-out;
+          }
           &:hover {
-            letter-spacing: 0.2rem;
-            transform: translateX(1rem);
-            transition: transform 0.2s ease-in-out;
+            span {
+              letter-spacing: 0.2rem;
+              padding-left: 1rem;
+              transition: padding 0.3s ease-in-out,
+                letter-spacing 0.3s ease-in-out;
+            }
           }
         }
       }
