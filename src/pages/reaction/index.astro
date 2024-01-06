@@ -1,0 +1,59 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Press Space">
+  <div class="container">
+    <h1>CLICK ONCE YOU SEE GREEN</h1>
+    <h1>...</h1>
+  </div>
+</SiteLayout>
+
+<style lang="scss">
+  @font-face {
+    font-family: "Proxima Nova";
+    src: url("/fonts/ProximaNova.otf") format("otf");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #0d0d0d;
+    min-height: 100vh;
+  }
+
+  h1 {
+    color: #b5ab9a;
+    font-family: Proxima Nova;
+    font-size: 80px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    font-family: "Proxima Nova", monospace;
+  }
+</style>
+
+<script>
+  //after 3-5 seconds random, change the color of the BG to green
+  //when the user clicks, check if the BG is green
+  //if it is, then show the time it took to click
+  //if not then show a message saying "you clicked too early" and change color to red
+  let time = Math.floor(Math.random() * 5000) + 3000;
+
+  setTimeout(function () {
+    (document.querySelector(".container") as HTMLElement).style.background =
+      "green";
+  }, time);
+
+  const container = document.querySelector(".container") as HTMLElement;
+  if (container.style.background === "green") {
+    alert("You clicked in " + time + " milliseconds");
+  } else {
+    container.style.background = "red";
+  }
+  alert("You clicked too early");
+</script>
