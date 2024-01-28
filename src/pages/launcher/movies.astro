@@ -1,0 +1,172 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+interface Movie {
+  Poster: string;
+  Title: string;
+}
+
+async function fetchMovies(search: string) {
+  const movies = await fetch(
+    `http://www.omdbapi.com/?s=${search}&apikey=18a29971`
+  );
+
+  const data = await movies.json();
+
+  const moviesList = data["Search"];
+  return moviesList;
+}
+
+const featured = await fetchMovies("Avengers");
+const expanding = await fetchMovies("horror");
+const moviesList = await fetchMovies("disney");
+---
+
+<SiteLayout title="Launcher">
+  <div class="launcher">
+    <div class="featured">
+      {
+        featured.map((data: Movie) => (
+          <div class="card" tabindex="0">
+            <img src={data["Poster"]} alt={data["Title"]} />
+          </div>
+        ))
+      }
+    </div>
+    <div class="featured-expand">
+      {
+        expanding.map((data: Movie) => (
+          <div class="card" tabindex="0">
+            <img src={data["Poster"]} alt={data["Title"]} />
+          </div>
+        ))
+      }
+    </div>
+    <div class="grid">
+      {
+        moviesList.map((data: Movie) => (
+          <div class="card" tabindex="0">
+            <img src={data["Poster"]} alt={data["Title"]} />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</SiteLayout>
+
+<script>
+  async function fetchMovies() {
+    var movies = fetch("http://www.omdbapi.com/?i=tt3896198&apikey=");
+  }
+</script>
+
+<style lang="scss">
+  :root {
+    background-color: #111;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@800&display=swap");
+  .launcher {
+    display: grid;
+    grid-template-rows: 400px 400px 1fr;
+    min-height: 100vh;
+    background-color: #111;
+  }
+
+  .card {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: #282828;
+    border-radius: 5px;
+    margin: 5px;
+    transition: scale 0.4s;
+    cursor: pointer;
+
+    &:hover,
+    &:focus-visible {
+      outline: 2px solid #666;
+      scale: 1.1;
+    }
+    p {
+      font-size: 80px;
+      opacity: 0.1;
+      color: white;
+      font-family: "Rubik", sans-serif;
+    }
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      display: block;
+    }
+  }
+
+  .featured {
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    width: 100%;
+    padding: 0 2rem;
+    gap: 2rem;
+    .card {
+      min-width: 600px;
+      height: clamp(200px, 100vh, 300px);
+      p {
+        font-size: 120px;
+      }
+    }
+  }
+
+  .featured-expand {
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+    width: 100%;
+    padding: 0 2rem;
+    gap: 2rem;
+    background-color: #1e1e1e;
+    border-top: 1px solid #555;
+    transition: all 0.3s ease-in-out 0.1s;
+
+    &:has(.card:nth-of-type(1):hover) {
+      width: calc(100% + 0px);
+      transform: translateX(-0px);
+    }
+    &:has(.card:hover) {
+      width: calc(100% + 150px);
+      transform: translateX(-150px);
+    }
+
+    .card {
+      min-width: 300px;
+      height: clamp(200px, 100vh, 300px);
+      transition: min-width 0.3s ease-in-out;
+      scale: 1;
+
+      &:hover {
+        min-width: 600px;
+      }
+      p {
+        font-size: 120px;
+      }
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-auto-rows: minmax(100px, 200px);
+    width: 100%;
+    background: #1b1a1a;
+    gap: 2rem;
+    border-top: 1px solid #555;
+    padding: 2rem;
+  }
+</style>
