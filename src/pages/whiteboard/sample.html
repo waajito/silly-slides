@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Canvas</title>
+    <style>
+        #canvas-container {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+
+        }
+
+        #canvas {
+            position: absolute;
+        }
+
+        .element {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+            background-color: #3498db;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .box {
+            width: 300px;
+            height: 300px;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="canvas-container">
+        <div id="canvas">
+            <!-- Elements will be dynamically added here -->
+
+            <div class="box"></div>
+        </div>
+    </div>
+    <script>
+        // Function to generate a random number between min and max
+        function getRandomNumber(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // Function to add a new element to the canvas at a random position
+        function addElement() {
+            var canvas = document.getElementById('canvas');
+            var element = document.createElement('div');
+            element.className = 'element';
+            element.style.left = getRandomNumber(0, canvas.offsetWidth - 50) + 'px';
+            element.style.top = getRandomNumber(0, canvas.offsetHeight - 50) + 'px';
+            canvas.appendChild(element);
+        }
+        // Function to generate a random number between min and max
+        function getRandomNumber(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+
+        // Function to add a new element to the canvas at a specific position
+        function addElementAtPosition(x, y) {
+            var canvas = document.getElementById('canvas');
+            var element = document.createElement('div');
+            element.className = 'element';
+            element.style.left = x + 'px';
+            element.style.top = y + 'px';
+            canvas.appendChild(element);
+            makeElementDraggable(element);
+        }
+
+        // Function to make an element draggable
+        function makeElementDraggable(element) {
+            var isDragging = false;
+            var startX, startY;
+
+            element.addEventListener('mousedown', function (event) {
+                isDragging = true;
+                startX = event.clientX - parseInt(element.style.left);
+                startY = event.clientY - parseInt(element.style.top);
+            });
+
+            element.addEventListener('mousemove', function (event) {
+                if (isDragging) {
+                    var newX = event.clientX - startX;
+                    var newY = event.clientY - startY;
+                    element.style.left = newX + 'px';
+                    element.style.top = newY + 'px';
+                }
+            });
+
+            element.addEventListener('mouseup', function () {
+                isDragging = false;
+            });
+        }
+
+        // Initial setup
+        window.onload = function () {
+            for (var i = 0; i < 10; i++) {
+                addElementAtPosition(getRandomNumber(0, window.innerWidth - 50), getRandomNumber(0, window.innerHeight - 50)); // Add some initial elements
+            }
+        };
+
+        // Pan and zoom functionality
+        var canvasContainer = document.getElementById('canvas-container');
+        var scale = 1;
+        var posX = 0;
+        var posY = 0;
+
+        canvasContainer.onwheel = function (event) {
+            event.preventDefault();
+            var delta = Math.max(-1, Math.min(1, (event.wheelDelta || -event.detail)));
+            var newScale = scale + delta * 0.1;
+            newScale = Math.max(0.1, Math.min(3, newScale)); // Limit scale to between 0.1 and 3
+            var rect = canvasContainer.getBoundingClientRect();
+            var mouseX = event.clientX - rect.left;
+            var mouseY = event.clientY - rect.top;
+            posX -= (mouseX - posX) * (newScale - scale) / scale;
+            posY -= (mouseY - posY) * (newScale - scale) / scale;
+            scale = newScale;
+            canvas.style.transform = 'translate(' + posX + 'px, ' + posY + 'px) scale(' + scale + ')';
+        };
+
+        // Function to handle panning
+        var isDragging = false;
+        var startX, startY;
+
+        canvasContainer.onmousedown = function (event) {
+            isDragging = true;
+            startX = event.clientX - posX;
+            startY = event.clientY - posY;
+        };
+
+        canvasContainer.onmousemove = function (event) {
+            if (isDragging) {
+                posX = event.clientX - startX;
+                posY = event.clientY - startY;
+                canvas.style.transform = 'translate(' + posX + 'px, ' + posY + 'px) scale(' + scale + ')';
+            }
+        };
+
+        window.onmouseup = function () {
+            isDragging = false;
+        };
+
+        // Add element at mouse position
+        var canvasContainer = document.getElementById('canvas-container');
+        canvasContainer.onclick = function (event) {
+            var rect = canvasContainer.getBoundingClientRect();
+            var mouseX = event.clientX - rect.left;
+            var mouseY = event.clientY - rect.top;
+            addElementAtPosition(mouseX, mouseY);
+        };
+
+    </script>
+</body>
+
+</html>
