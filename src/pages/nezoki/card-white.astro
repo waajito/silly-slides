@@ -1,0 +1,203 @@
+---
+interface Props {
+  backgroundColor: string;
+  color: string;
+  title: string;
+  value: number;
+}
+
+const { backgroundColor, title, value, color } = Astro.props;
+---
+
+<div class="card">
+  <svg
+    class="card-white"
+    xmlns="http://www.w3.org/2000/svg"
+    width="341"
+    height="416"
+    viewBox="0 0 341 416"
+    fill="none"
+  >
+    <g filter="url(#filter0_dddd_5_68)">
+      <path
+        d="M44 87.1559C44 49.8414 44 31.1842 55.5921 19.5921C67.1842 8 85.8415 8 123.156 8H176.27C176.754 8 176.997 8 177.202 8.00213C198.537 8.22367 215.856 25.3165 216.358 46.6464C216.363 46.8518 216.367 47.138 216.374 47.7103V47.7103C216.378 48.0368 216.381 48.2001 216.382 48.3014C216.775 69.7953 234.254 87.0453 255.751 87.1554C255.852 87.1559 255.972 87.1559 256.211 87.1559V87.1559C256.453 87.1559 256.573 87.1559 256.676 87.1565C278.374 87.2686 295.936 104.831 296.049 126.529C296.049 126.632 296.049 126.753 296.049 126.994V180.893C296.049 218.208 296.049 236.865 284.457 248.457C272.865 260.049 254.208 260.049 216.893 260.049H123.156C85.8414 260.049 67.1842 260.049 55.5921 248.457C44 236.865 44 218.208 44 180.893V87.1559Z"
+        fill={backgroundColor}></path>
+    </g>
+    <defs>
+      <filter
+        id="filter0_dddd_5_68"
+        x="0"
+        y="0"
+        width="340.049"
+        height="415.049"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"></feColorMatrix>
+        <feOffset dy="7"></feOffset>
+        <feGaussianBlur stdDeviation="7.5"></feGaussianBlur>
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"></feColorMatrix>
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow_5_68"></feBlend>
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"></feColorMatrix>
+        <feOffset dy="28"></feOffset>
+        <feGaussianBlur stdDeviation="14"></feGaussianBlur>
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.09 0"></feColorMatrix>
+        <feBlend
+          mode="normal"
+          in2="effect1_dropShadow_5_68"
+          result="effect2_dropShadow_5_68"></feBlend>
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"></feColorMatrix>
+        <feOffset dy="62"></feOffset>
+        <feGaussianBlur stdDeviation="18.5"></feGaussianBlur>
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.05 0"></feColorMatrix>
+        <feBlend
+          mode="normal"
+          in2="effect2_dropShadow_5_68"
+          result="effect3_dropShadow_5_68"></feBlend>
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"></feColorMatrix>
+        <feOffset dy="111"></feOffset>
+        <feGaussianBlur stdDeviation="22"></feGaussianBlur>
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.01 0"></feColorMatrix>
+        <feBlend
+          mode="normal"
+          in2="effect3_dropShadow_5_68"
+          result="effect4_dropShadow_5_68"></feBlend>
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect4_dropShadow_5_68"
+          result="shape"></feBlend>
+      </filter>
+    </defs>
+  </svg>
+  <div class="link">
+    <svg
+      class="link-bg"
+      xmlns="http://www.w3.org/2000/svg"
+      width="68"
+      height="67"
+      viewBox="0 0 68 67"
+      fill="none"
+    >
+      <circle cx="33.7201" cy="33.3288" r="33.3288" fill="#030311"></circle>
+    </svg>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="63"
+      height="63"
+      viewBox="0 0 63 63"
+      fill="none"
+      class="arrow"
+    >
+      <path
+        d="M41.716 32.6018L41.716 20.8183M41.716 20.8183L29.8897 20.7755M41.716 20.8183L22.5678 39.9665"
+        stroke="white"
+        stroke-width="2.08305"
+        stroke-linecap="round"
+        stroke-linejoin="round"></path>
+    </svg>
+  </div>
+
+  <div class="content">
+    <h3 style=`color : ${color}`>{title}</h3>
+    <div class="row">
+      <h1 style=`color : ${color}`>{value}</h1>
+      <p style=`color : ${color}`>tasks</p>
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .card {
+    position: relative;
+    width: 305px;
+    transition: all 0.3s;
+    font-family: "Krona One";
+    &:hover {
+      scale: 1.1;
+      .link {
+        scale: 0.8;
+        rotate: 180deg;
+      }
+    }
+
+    .row {
+      display: flex;
+      align-items: flex-start;
+
+      gap: 8px;
+    }
+    h3 {
+      font-size: 1rem;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin: 0;
+    }
+    p {
+      font-size: 12px;
+      opacity: 0.7;
+    }
+  }
+  .content {
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    width: 240px;
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 45%;
+  }
+
+  .card-white {
+    top: 0;
+    left: 0;
+  }
+
+  .link {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: all 0.3s;
+  }
+
+  .link-bg {
+  }
+
+  .arrow {
+    position: absolute;
+    top: 3px;
+    left: 1px;
+  }
+</style>

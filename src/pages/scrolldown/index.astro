@@ -71,85 +71,85 @@ import Mouse from "./mouse.astro";
 </SiteLayout>
 
 <script lang="js">
-//gsap
-gsap.registerPlugin(ScrollTrigger);
+  //gsap
+  gsap.registerPlugin(ScrollTrigger);
 
-const splitTypes = document.querySelectorAll(".reveal");
+  const splitTypes = document.querySelectorAll(".reveal");
 
-splitTypes.forEach((char, i) => {
+  splitTypes.forEach((char, i) => {
     const fg = char.dataset.fgColor;
 
     if (i == 0) {
-        const text = new SplitType(char, { types: "chars" });
+      const text = new SplitType(char, { types: "chars" });
 
-        console.log(char);
-        gsap.fromTo(
-            text.chars,
-            {
-                opacity: 0.2,
-                color: fg,
-            },
-            {
-                color: fg,
-                opacity: 1,
-                duration: 0.3,
-                stagger: 0.02,
-                scrollTrigger: {
-                    trigger: char,
-                    start: "top 50%",
-                    end: "top 10%",
-                    toggleActions: "play play reverse reverse",
-                },
-            }
-        );
+      console.log(char);
+      gsap.fromTo(
+        text.chars,
+        {
+          opacity: 0.2,
+          color: fg,
+        },
+        {
+          color: fg,
+          opacity: 1,
+          duration: 0.3,
+          stagger: 0.02,
+          scrollTrigger: {
+            trigger: char,
+            start: "top 50%",
+            end: "top 10%",
+            toggleActions: "play play reverse reverse",
+          },
+        }
+      );
     } else if (i == 1) {
-        const text = new SplitType(char, { types: "words" });
+      const text = new SplitType(char, { types: "words" });
 
-        gsap.fromTo(
-            text.words,
-            {
-                opacity: 0.1,
-                color: fg,
-                y: -10,
-            },
-            {
-                color: fg,
-                opacity: 1,
-                y: 0,
+      gsap.fromTo(
+        text.words,
+        {
+          opacity: 0.1,
+          color: fg,
+          y: -10,
+        },
+        {
+          color: fg,
+          opacity: 1,
+          y: 0,
 
-                duration: 0.3,
-                stagger: 0.1,
-                scrollTrigger: {
-                    trigger: char,
-                    start: "top 50%",
-                    end: "top 10%",
-                    toggleActions: "play play reverse reverse",
-                },
-            }
-        );
+          duration: 0.3,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: char,
+            start: "top 50%",
+            end: "top 10%",
+            toggleActions: "play play reverse reverse",
+          },
+        }
+      );
     } else if (i == 2) {
-        const text = new SplitType(char, { types: "chars" });
+      const text = new SplitType(char, { types: "chars" });
 
-        gsap.fromTo(
-            text.chars,
-            {
-                opacity: 0.2,
-                color: fg,
-            },
-            {
-                color: fg,
-                opacity: 1,
-                duration: 0.3,
-                stagger: 0.02,
-                scrollTrigger: {
-                    trigger: char,
-                    start: "top 50%",
-                    end: "top 10%",
-                    toggleActions: "play play reverse reverse",
-                    scrub: true,
-                },
-            }
-        );
+      gsap.fromTo(
+        text.chars,
+        {
+          opacity: 0.2,
+          color: fg,
+        },
+        {
+          color: fg,
+          opacity: 1,
+          duration: 0.3,
+          stagger: 0.02,
+          scrollTrigger: {
+            trigger: char,
+            start: "top 50%",
+            end: "top 10%",
+            toggleActions: "play play reverse reverse",
+            scrub: true,
+          },
+        }
+      );
     }
     // else
     //     gsap.fromTo(
@@ -172,21 +172,21 @@ splitTypes.forEach((char, i) => {
     //             },
     //         }
     //     );
-});
+  });
 
-//lenis
-const lenis = new Lenis();
+  //lenis
+  const lenis = new Lenis();
 
-lenis.on("scroll", (e) => {
+  lenis.on("scroll", (e) => {
     console.log(e);
-});
+  });
 
-function raf(time) {
+  function raf(time) {
     lenis.raf(time);
     requestAnimationFrame(raf);
-}
+  }
 
-requestAnimationFrame(raf);
+  requestAnimationFrame(raf);
 </script>
 
 <style lang="scss">
