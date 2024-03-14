@@ -1,6 +1,7 @@
 ---
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import CardWhite from "./card-white.astro";
+import CardLarge from "./card-large.astro";
 ---
 
 <SiteLayout title="Nezuko">
@@ -22,6 +23,7 @@ import CardWhite from "./card-white.astro";
         color="black"
         value={340}
       />
+      <CardLarge />
     </div>
   </section>
 </SiteLayout>
@@ -31,7 +33,7 @@ import CardWhite from "./card-white.astro";
 
   :root {
     --anim-ease: cubic-bezier(0.47, 0, 0.23, 1.38);
-    --anim-time: 0.3s;
+    --anim-time: 0.5s;
   }
   body {
     font-family: "Krona One", sans-serif;
@@ -47,6 +49,8 @@ import CardWhite from "./card-white.astro";
     text-orientation: upright;
     font-size: 90px;
     letter-spacing: 20px;
+    right: -200px;
+    transition: all var(--anim-time) var(--anim-ease);
   }
 
   .hero-section {
@@ -83,6 +87,9 @@ import CardWhite from "./card-white.astro";
   .cards {
     display: flex;
     z-index: 1;
+    position: absolute;
+    bottom: -1000px;
+    transition: all var(--anim-time) var(--anim-ease);
   }
 
   .hero-section:hover {
@@ -90,12 +97,23 @@ import CardWhite from "./card-white.astro";
       scale: 2.2;
     }
 
+    .header-right {
+      right: 0px;
+    }
     .sun-blur {
       scale: 2.5;
       filter: blur(20px);
     }
     .hero-image {
-      max-width: 800px;
+      max-width: 900px;
+    }
+
+    .cards {
+      bottom: -100px;
+      scale: 0.8;
+    }
+    & > * {
+      translatey: 0px;
     }
   }
 </style>
