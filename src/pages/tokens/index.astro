@@ -1,0 +1,141 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Press Space">
+  <div class="container">
+    <div class="tokens-container">
+      <div class="tokens">
+        <div class="overlay" data-name="Bitcoin">
+          <img
+            src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/svg/icon/0xbtc.svg"
+            alt=""
+            height="50"
+            width="50"
+          />
+        </div>
+        <div class="overlay" data-name="Binance">
+          <img
+            src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/svg/icon/bnb.svg"
+            alt=""
+            height="50"
+            width="50"
+          />
+        </div>
+        <div class="overlay" data-name="CVC">
+          <img
+            src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/svg/icon/cvc.svg"
+            alt=""
+            height="50"
+            width="50"
+          />
+        </div>
+        <div class="overlay" data-name="Fun Coin">
+          <img
+            src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/svg/icon/fun.svg"
+            alt=""
+            height="50"
+            width="50"
+          />
+        </div>
+        <div class="overlay" data-name="Matic">
+          <img
+            src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/svg/icon/matic.svg"
+            alt=""
+            height="50"
+            width="50"
+          />
+        </div>
+        <div class="overlay" data-name="MSR">
+          <img
+            src="https://cdn.jsdelivr.net/gh/atomiclabs/cryptocurrency-icons@1a63530be6e374711a8554f31b17e4cb92c25fa5/svg/icon/msr.svg"
+            alt=""
+            height="50"
+            width="50"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</SiteLayout>
+
+<style lang="scss">
+  @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Krona+One&display=swap");
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .tokens-container {
+    // height: 48px;
+    padding: 0px 24px;
+    border-radius: 8px;
+    box-shadow: 0px 10px 30px rgba(21, 13, 45, 0.3);
+    border: 1px solid rgba(19, 25, 104, 0.1);
+    width: 380px;
+  }
+
+  .tokens {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: row-reverse;
+  }
+  .overlay {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    width: 70px;
+    margin: 0 -18px;
+    transition: all 0.3s linear;
+    position: relative;
+    &:hover {
+      margin: 0px 8px;
+      &::before {
+        content: attr(data-name);
+        display: flex;
+        white-space: nowrap;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: -30px;
+        padding: 8px 16px;
+        background: linear-gradient(0deg, #2a2d3feb 0%, #2b2f45eb 100%);
+        color: white;
+        z-index: 1;
+        font-family: "Inter", sans-serif;
+        border-radius: 4px;
+        animation: fadeIn 0.1s ease-in;
+
+        @keyframes fadeIn {
+          0% {
+            opacity: 0;
+            transform-origin: 50% 100%;
+            scale: 0.5;
+          }
+          100% {
+            opacity: 1;
+            scale: 1;
+          }
+        }
+      }
+    }
+
+    &:last-child {
+      margin: 0 -18px 0px 0px;
+      &:hover {
+        margin: 0 10px 0px 0px;
+      }
+    }
+  }
+  .tokens img {
+    width: 50px;
+    height: 50px;
+    padding: 0px;
+    margin: 0px;
+  }
+</style>
