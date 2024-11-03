@@ -1,0 +1,69 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+import IconCard from "./iconCard.astro";
+---
+
+<SiteLayout title="Hold Icons">
+  <div class="container">
+    <h1>Icons Holds</h1>
+    <div class="scroll-container">
+      <IconCard iconUrl="/icons/clipboard.svg" name="Clipboard" />
+      <IconCard iconUrl="/icons/confetti-minimalistic.svg" name="Confetti" />
+      <IconCard iconUrl="/icons/download-square.svg" name="Download" />
+      <IconCard iconUrl="/icons/exit.svg" name="Exit" />
+      <IconCard iconUrl="/icons/heart-angle.svg" name="Like" />
+      <IconCard iconUrl="/icons/medal-star-square.svg" name="Medal" />
+      <IconCard iconUrl="/icons/palette-round.svg" name="Palette" />
+      <IconCard iconUrl="/icons/qr-code.svg" name="QR Code" />
+      <IconCard iconUrl="/icons/colour-tuneing.svg" name="Tuneing" />
+    </div>
+  </div>
+</SiteLayout>
+
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap");
+
+  * {
+    font-family: "Noto Sans", sans-serif;
+    margin: 0;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .scroll-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 400px;
+  }
+</style>
+
+<script lang="js" is:inline>
+  const cards = document.querySelectorAll(".iconCard");
+
+  cards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const currentCount = card.querySelector(".count").querySelector("p");
+
+      currentCount.textContent = parseInt(currentCount.textContent) + 1;
+    });
+  });
+
+  // remove count
+  const counts = document.querySelectorAll(".count");
+  counts.forEach((count) => {
+    count.addEventListener("click", (e) => {
+      e.stopPropagation();
+      //  minus 1
+      const currentCount = count.querySelector("p");
+      if (parseInt(currentCount.textContent) > 0) {
+        currentCount.textContent = parseInt(currentCount.textContent) - 1;
+      }
+    });
+  });
+</script>
