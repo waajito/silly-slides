@@ -38,6 +38,9 @@
   onmousedown={onPressStart}
   onmouseup={onPressRelease}
   onmouseleave={onPressRelease}
+  ontouchstart={onPressStart}
+  ontouchend={onPressRelease}
+  ontouchcancel={onPressRelease}
 >
   <div class="count" class:show={hidden} onclick={decrement}>
     <img src="/icons/close.svg" alt="close" height="6" width="6" />
@@ -58,6 +61,7 @@
       color: #ffffff !important;
     }
   }
+
   button {
     all: unset;
     background-color: none;
@@ -81,6 +85,7 @@
   }
 
   .container {
+    -webkit-tap-highlight-color: transparent;
     height: 100px;
     width: 100px;
     display: flex;
