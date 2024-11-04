@@ -1,20 +1,42 @@
----
-// props for iconUrl and name in astro
-const { iconUrl, name } = Astro.props;
----
+<script>
+  let { iconUrl, name } = $props();
+  let enable = $state(0);
+  let count = $state(0);
 
-<div class="container iconCard">
-  <div class="count hidden" id=`count ${iconUrl}`>
+  function increment() {
+    count = count + 1;
+  }
+  let hidden = $derived(count != 0);
+</script>
+
+<button class="container iconCard" onclick={increment}>
+  <div class="count" class:show={hidden}>
     <img src="/icons/close.svg" alt="close" height="6" width="6" />
-    <p>0</p>
+    <p>{count}</p>
   </div>
   <img class="icon" src={iconUrl} alt={name} />
   <p class="name">{name}</p>
   <div class="fill"></div>
-</div>
+</button>
 
 <style lang="scss">
-  &.container {
+    button{
+        all: unset;
+    }
+  *::selection {
+    background: none;
+  }
+
+  .count {
+    transition: all 0.3s ease;
+    transform: translateY(-80px);
+  }
+
+  .show {
+    transform: translateY(0px);
+  }
+  
+  .container {
     height: 100px;
     width: 100px;
     display: flex;
@@ -28,7 +50,7 @@ const { iconUrl, name } = Astro.props;
     transition: all 0.3s ease 0.1s;
     overflow: hidden;
     position: relative;
-    cursor: pointer;
+
     .icon {
       height: 50px;
       width: 50px;
@@ -39,14 +61,6 @@ const { iconUrl, name } = Astro.props;
         background: none;
       }
     }
-  *::selection {
-    background: none;
-  }
-
-  .hidden {
-    transform: translateY(-60px);
-  }
-  
 
     .name {
       font-family: "Noto Sans", sans-serif;

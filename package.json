@@ -10,7 +10,13 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/svelte": "^5.7.2",
     "astro": "^2.9.6",
-    "sass": "^1.64.1"
+    "sass": "^1.64.1",
+    "svelte": "^5.0.0-next.190",
+    "typescript": "^5.3.3"
+  },
+  "overrides": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.0-next.6"
   }
 }

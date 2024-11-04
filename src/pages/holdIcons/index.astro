@@ -1,21 +1,22 @@
 ---
 import SiteLayout from "../../layouts/SiteLayout.astro";
-import IconCard from "./iconCard.astro";
+// import IconCard from "./iconCard.astro";
+import IconCard from "./iconCard.svelte";
 ---
 
 <SiteLayout title="Hold Icons">
   <div class="container">
     <h1>Icons Holds</h1>
     <div class="scroll-container">
-      <IconCard iconUrl="/icons/clipboard.svg" name="Clipboard" />
-      <IconCard iconUrl="/icons/confetti-minimalistic.svg" name="Confetti" />
-      <IconCard iconUrl="/icons/download-square.svg" name="Download" />
-      <IconCard iconUrl="/icons/exit.svg" name="Exit" />
-      <IconCard iconUrl="/icons/heart-angle.svg" name="Like" />
-      <IconCard iconUrl="/icons/medal-star-square.svg" name="Medal" />
-      <IconCard iconUrl="/icons/palette-round.svg" name="Palette" />
-      <IconCard iconUrl="/icons/qr-code.svg" name="QR Code" />
-      <IconCard iconUrl="/icons/colour-tuneing.svg" name="Tuneing" />
+      <IconCard client:load iconUrl="/icons/clipboard.svg" name="Clipboard" />
+      <IconCard client:load iconUrl="/icons/confetti-minimalistic.svg" name="Confetti" />
+      <IconCard client:load iconUrl="/icons/download-square.svg" name="Download" />
+      <IconCard client:load iconUrl="/icons/exit.svg" name="Exit" />
+      <IconCard client:load iconUrl="/icons/heart-angle.svg" name="Like" />
+      <IconCard client:load iconUrl="/icons/medal-star-square.svg" name="Medal" />
+      <IconCard client:load iconUrl="/icons/palette-round.svg" name="Palette" />
+      <IconCard client:load iconUrl="/icons/qr-code.svg" name="QR Code" />
+      <IconCard client:load iconUrl="/icons/colour-tuneing.svg" name="Tuneing" />
     </div>
   </div>
 </SiteLayout>
@@ -33,6 +34,7 @@ import IconCard from "./iconCard.astro";
     justify-content: center;
     align-items: center;
     height: 100vh;
+    gap: 2rem;
   }
   .scroll-container {
     display: flex;
@@ -42,33 +44,3 @@ import IconCard from "./iconCard.astro";
     max-width: 400px;
   }
 </style>
-
-<script lang="js" is:inline>
-  const cards = document.querySelectorAll(".iconCard");
-
-  cards.forEach((card) => {
-    card.addEventListener("click", () => {
-      const currentCount = card.querySelector(".count").querySelector("p");
-
-      currentCount.textContent = parseInt(currentCount.textContent) + 1;
-    });
-  });
-  
- 
-  /**
-   * This script selects all elements with the class "count" and adds a click event listener to each.
-   * When an element is clicked, the event propagation is stopped.
-   * If the text content of the <p> element inside the clicked element is greater than 0,
-   * it decrements the text content by 1.
-   */
-  const counts = document.querySelectorAll(".count");
-  counts.forEach((count) => {
-    count.addEventListener("click", (e) => {
-      e.stopPropagation();
-      const currentCount = count.querySelector("p");
-      if (parseInt(currentCount.textContent) > 0) {
-        currentCount.textContent = parseInt(currentCount.textContent) - 1;
-      }
-    });
-  });
-</script>
