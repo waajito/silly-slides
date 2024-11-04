@@ -7,22 +7,66 @@
     count = count + 1;
   }
   let hidden = $derived(count != 0);
+
+  let progress = $state(0);
+  let filled = $derived(count > 0);
+  let interval;
+
+  function decrement() {
+    count = count - 1;
+  }
+  function onPressStart() {
+    progress = 0;
+    interval = setInterval(() => {
+      progress += 0.01;
+      if (progress >= 1) {
+        increment();
+        clearInterval(interval);
+      }
+    }, 10);
+  }
+
+  function onPressRelease() {
+    clearInterval(interval);
+    progress = 0;
+  }
 </script>
 
-<button class="container iconCard" onclick={increment}>
-  <div class="count" class:show={hidden}>
+<button
+  class="container iconCard"
+  class:filled
+  onmousedown={onPressStart}
+  onmouseup={onPressRelease}
+  onmouseleave={onPressRelease}
+>
+  <div class="count" class:show={hidden} onclick={decrement}>
     <img src="/icons/close.svg" alt="close" height="6" width="6" />
     <p>{count}</p>
   </div>
   <img class="icon" src={iconUrl} alt={name} />
   <p class="name">{name}</p>
-  <div class="fill"></div>
+  <div class="fill" style={`width : ${progress * 100}%`}></div>
 </button>
 
 <style lang="scss">
-    button{
-        all: unset;
+  .filled {
+    background-color: #539dff !important;
+    .icon {
+      filter: invert(0) !important;
     }
+    .name {
+      color: #ffffff !important;
+    }
+  }
+  button {
+    all: unset;
+    background-color: none;
+
+    &:focus {
+      outline: none;
+      background-color: none;
+    }
+  }
   *::selection {
     background: none;
   }
@@ -35,7 +79,7 @@
   .show {
     transform: translateY(0px);
   }
-  
+
   .container {
     height: 100px;
     width: 100px;
@@ -50,6 +94,7 @@
     transition: all 0.3s ease 0.1s;
     overflow: hidden;
     position: relative;
+    cursor: pointer;
 
     .icon {
       height: 50px;
@@ -100,14 +145,15 @@
     }
     .fill {
       height: 100%;
-      width: 0%;
+      /* width: 0%; */
       background: #4487de;
       position: absolute;
       top: 0;
       left: 0;
       z-index: 2;
-      transition: all 1.5s ease 0.2s;
+      /* transition: all 1.5s ease 0.2s; */
     }
+
     &:hover {
       background-color: #539dff;
       .icon {
@@ -127,7 +173,7 @@
       scale: 0.95;
 
       .fill {
-        width: 100%;
+        /* width: 100%; */
       }
     }
   }
