@@ -107,6 +107,7 @@
       filter: invert(0.4);
       transition: all 0.3s ease;
       z-index: 3;
+      
       &::selection {
         background: none;
       }
