@@ -4,7 +4,7 @@ const { iconUrl, name } = Astro.props;
 ---
 
 <div class="container iconCard">
-  <div class="count" id=`count ${iconUrl}`>
+  <div class="count hidden" id=`count ${iconUrl}`>
     <img src="/icons/close.svg" alt="close" height="6" width="6" />
     <p>0</p>
   </div>
@@ -18,6 +18,9 @@ const { iconUrl, name } = Astro.props;
     background: none;
   }
 
+  .hidden {
+    transform: translateY(-60px);
+  }
   .container {
     height: 100px;
     width: 100px;

@@ -53,13 +53,18 @@ import IconCard from "./iconCard.astro";
       currentCount.textContent = parseInt(currentCount.textContent) + 1;
     });
   });
-
-  // remove count
+  
+ 
+  /**
+   * This script selects all elements with the class "count" and adds a click event listener to each.
+   * When an element is clicked, the event propagation is stopped.
+   * If the text content of the <p> element inside the clicked element is greater than 0,
+   * it decrements the text content by 1.
+   */
   const counts = document.querySelectorAll(".count");
   counts.forEach((count) => {
     count.addEventListener("click", (e) => {
       e.stopPropagation();
-      //  minus 1
       const currentCount = count.querySelector("p");
       if (parseInt(currentCount.textContent) > 0) {
         currentCount.textContent = parseInt(currentCount.textContent) - 1;
