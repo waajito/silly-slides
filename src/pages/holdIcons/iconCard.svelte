@@ -52,16 +52,6 @@
 </button>
 
 <style lang="scss">
-  .filled {
-    background-color: #539dff !important;
-    .icon {
-      filter: invert(0) !important;
-    }
-    .name {
-      color: #ffffff !important;
-    }
-  }
-
   button {
     all: unset;
     background-color: none;
@@ -107,7 +97,7 @@
       filter: invert(0.4);
       transition: all 0.3s ease;
       z-index: 3;
-      
+      pointer-events: none;
       &::selection {
         background: none;
       }
@@ -142,6 +132,8 @@
       img {
         transform: translateY(1px);
         margin-right: 2px;
+        /* non clickable */
+        pointer-events: none;
       }
       p {
         color: #539dff;
@@ -152,26 +144,37 @@
     .fill {
       height: 100%;
       /* width: 0%; */
-      background: #4487de;
+      background: #00000017;
       position: absolute;
       top: 0;
       left: 0;
       z-index: 2;
       /* transition: all 1.5s ease 0.2s; */
     }
-
-    &:hover {
-      background-color: #539dff;
+    &.filled {
+      background-color: #00000018;
       .icon {
-        filter: invert(0);
-        scale: 1.3;
-        transform: translateY(8px);
+        filter: invert(0) !important;
       }
-
       .name {
-        color: #ffffff;
-        transform: translateY(50px);
-        opacity: 0;
+        color: #ffffff !important;
+      }
+    }
+
+    @media screen and (min-width: 768px) {
+      &:hover {
+        background-color: #539dff;
+        .icon {
+          filter: invert(0);
+          scale: 1.3;
+          transform: translateY(8px);
+        }
+
+        .name {
+          color: #ffffff;
+          transform: translateY(50px);
+          opacity: 0;
+        }
       }
     }
 
@@ -180,6 +183,33 @@
 
       .fill {
         /* width: 100%; */
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      &.filled {
+        background-color: #4487de !important;
+      }
+      transition: all 0.3s ease 0s;
+      &:hover {
+        background-color: #2222221a;
+      }
+
+      &:active {
+        /* background-color: #539dff; */
+        .icon {
+          /* filter: invert(0); */
+          scale: 1.3;
+          transform: translateY(8px);
+        }
+
+        .name {
+          /* color: #ffffff; */
+          transform: translateY(50px);
+          opacity: 0;
+        }
+
+        scale: 0.95;
       }
     }
   }
