@@ -1,0 +1,87 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Harmony" /><div class="container">
+  <div class="clock">
+    <div class="hour handle"></div>
+    <div class="minute handle"></div>
+    <div class="second handle"></div>
+    <div class="knob"></div>
+  </div>
+</div>
+
+<style lang="scss">
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #b5ff8a;
+    padding: 0;
+    margin: 0;
+  }
+
+  .clock {
+    border-radius: 50%;
+    height: 712px;
+    width: 712px;
+    background-color: #fff;
+    border: 8px solid #202020;
+  }
+
+  .handle {
+    transform-origin: bottom center;
+    position: absolute;
+    border-radius: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 50%;
+  }
+
+  .hour {
+    width: 12px;
+    height: 250px;
+    background-color: #ff8888;
+    z-index: 1;
+    transition: all 0.5s;
+  }
+
+  .minute {
+    width: 8px;
+    height: 320px;
+    background-color: #212121;
+  }
+
+  .second {
+    width: 4px;
+    height: 340px;
+    background-color: #0f0f0f;
+  }
+</style>
+
+<script>
+  const hour = document.querySelector(".hour") as HTMLElement;
+  const minute = document.querySelector(".minute") as HTMLElement;
+  const second = document.querySelector(".second") as HTMLElement;
+  const knob = document.querySelector(".knob") as HTMLElement;
+
+  function updateClock() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    const milliseconds = now.getMilliseconds();
+
+    const hourDegrees = hours * 30 + 0.5 * minutes;
+    const minuteDegrees = minutes * 6 + 0.1 * seconds;
+    const secondDegrees = seconds * 6 + milliseconds * 0.006;
+
+    if (hour) hour.style.transform = `rotate(${hourDegrees}deg)`;
+    if (minute) minute.style.transform = `rotate(${minuteDegrees}deg)`;
+    if (second) second.style.transform = `rotate(${secondDegrees}deg)`;
+  }
+
+  setInterval(updateClock, 1000);
+  updateClock(); // Initial call to set the clock immediately
+</script>
