@@ -94,7 +94,7 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
   const parallaxContainer = document.querySelector('.container.parallax') as HTMLElement;
 
   if (parallaxContainer) {
-    parallaxContainer.addEventListener('scroll', () => {
+    const updateParallax = () => {
       const cards = parallaxContainer.querySelectorAll('.card');
 
       cards.forEach((card) => {
@@ -112,6 +112,12 @@ import SiteLayout from "../../layouts/SiteLayout.astro";
           img.style.setProperty('--parallax-offset', `${parallaxOffset}px`);
         }
       });
-    });
+    };
+
+    // Initialize parallax on load
+    updateParallax();
+
+    // Update on scroll
+    parallaxContainer.addEventListener('scroll', updateParallax);
   }
 </script>
