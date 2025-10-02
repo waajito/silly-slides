@@ -1,0 +1,113 @@
+---
+import SiteLayout from "../../layouts/SiteLayout.astro";
+---
+
+<SiteLayout title="Parallax Scroll">
+ <div class="main">
+    <div class="container">
+     <div class="card">
+        <img src="https://images.unsplash.com/photo-1754764464593-638adca1eb4f?q=80&w=1975" alt="">
+     </div>
+     <div class="card">
+        <img src="https://images.unsplash.com/photo-1757137910873-504d97aa80de?q=80&w=2338" alt="">
+     </div>
+     <div class="card">
+        <img src="https://images.unsplash.com/photo-1758716147829-51f3d07ab549?q=80&w=987" alt="">
+     </div>
+     <div class="card">
+        <img src="https://images.unsplash.com/photo-1759159396735-0caf3d9f6046?q=80&w=987" alt="">
+     </div>
+     <div class="card">
+        <img src="https://images.unsplash.com/photo-1758351754305-fe00523aaefe?q=80&w=2664" alt="">
+     </div>
+  </div>
+ <div class="container parallax">
+     <div class="card">
+        <img src="https://images.unsplash.com/photo-1754764464593-638adca1eb4f?q=80&w=1975" alt="">
+     </div>
+     <div class="card">
+        <img src="https://images.unsplash.com/photo-1757137910873-504d97aa80de?q=80&w=2338" alt="">
+     </div>
+     <div class="card">
+        <img src="https://images.unsplash.com/photo-1758716147829-51f3d07ab549?q=80&w=987" alt="">
+     </div>
+     <div class="card">
+        <img src="https://images.unsplash.com/photo-1759159396735-0caf3d9f6046?q=80&w=987" alt="">
+     </div>
+     <div class="card">
+        <img src="https://images.unsplash.com/photo-1758351754305-fe00523aaefe?q=80&w=2664" alt="">
+     </div>
+  </div>
+ </div>
+</SiteLayout>
+
+<style lang="scss">
+    .main {
+        display: flex;
+        height: 100vh;
+        width: 100vw;
+        flex-direction: column;
+    }
+    .container {
+        padding: 32px;
+        width: 600px;
+        height: 50%;
+        margin: 0 auto;
+        border: 1px solid black;
+        border-top: 0px;
+        // border-bottom: 0px;
+        display: flex;
+        gap: 16px;
+        overflow-x: scroll;
+        align-items: center;
+    }
+  .card {
+    height: 200px;
+    min-width: 400px;
+    border-radius: 16px;
+    background-color: red;
+    overflow: hidden;
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+  }
+
+  .parallax {
+    // image inside card should move slower than the scroll
+    .card {
+      overflow: hidden;
+      img {
+        transform: translateX(var(--parallax-offset, 0px)) scale(1.3);
+        transition: transform 0.1s linear;
+      }
+    }
+  }
+</style>
+
+<script>
+  const parallaxContainer = document.querySelector('.container.parallax') as HTMLElement;
+
+  if (parallaxContainer) {
+    parallaxContainer.addEventListener('scroll', () => {
+      const cards = parallaxContainer.querySelectorAll('.card');
+
+      cards.forEach((card) => {
+        const img = card.querySelector('img') as HTMLElement;
+        if (img) {
+          const cardElement = card as HTMLElement;
+          const cardRect = cardElement.getBoundingClientRect();
+          const containerRect = parallaxContainer.getBoundingClientRect();
+
+          // Calculate how far the card has moved relative to the container viewport
+          const cardVisibleOffset = cardRect.left - containerRect.left;
+
+          // Move image slower (0.2x) in opposite direction to create parallax
+          const parallaxOffset = -cardVisibleOffset * 0.2;
+          img.style.setProperty('--parallax-offset', `${parallaxOffset}px`);
+        }
+      });
+    });
+  }
+</script>
